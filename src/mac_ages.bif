@@ -1,1 +1,24 @@
+%%{
+#include "mac_trie.h"
 
+#include <chrono>
+#include <cstdint>
+%%}
+
+function load_mac_ages%(csv_file: string%) : int
+  %{
+  using namespace plugin::tenzir;
+  auto entries = mac_ages::data.load(csv_file->CheckString());
+  return new Val(static_cast<int64_t>(entries), TYPE_INT);
+  %}
+
+function lookup_mac_age%(mac: string%) : time
+  %{
+  using namespace std::chrono;
+  using namespace plugin::tenzir;
+  auto age = mac_ages::data.lookup(mac->CheckString(), mac->Len());
+  if (age == mac_ages::age_type::min())
+    return new Val(0.0, TYPE_TIME);
+  auto secs = duration_cast<seconds>(age.time_since_epoch());
+  return new Val(static_cast<double>(secs.count()), TYPE_TIME);
+  %}

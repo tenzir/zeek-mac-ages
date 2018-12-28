@@ -5,7 +5,9 @@ project(BroPluginmac_ages)
 include(BroPlugin)
 
 bro_plugin_begin(tenzir mac_ages)
-bro_plugin_cc(src/Plugin.cc)
+bro_plugin_cc(
+  src/Plugin.cc
+  src/mac_trie.cc)
 bro_plugin_bif(src/mac_ages.bif)
 bro_plugin_dist_files(README CHANGES COPYING VERSION)
 bro_plugin_end()
