@@ -15,7 +15,7 @@ First, install the package with the [Zeek package
 manager](https://github.com/zeek/package-manager):
 
 ```sh
-bro-pkg install tenzir/mac-ages
+bro-pkg install tenzir/zeek-mac-ages
 ```
 
 Then make sure that you have a recent version of the MAC database installed
