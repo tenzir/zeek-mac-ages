@@ -1,5 +1,4 @@
-#ifndef BRO_PLUGIN_TENZIR_TRIE
-#define BRO_PLUGIN_TENZIR_TRIE
+#pragma once
 
 #include <plugin/Plugin.h>
 
@@ -53,5 +52,3 @@ extern mac_trie data;
 } // namespace mac_ages
 } // namespace tenzir
 } // namespace plugin
-
-#endif

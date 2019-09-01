@@ -2,7 +2,7 @@
 
 @load base/protocols/dhcp
 
-@load ./utils.bro
+@load ./utils.zeek
 
 module DHCP;
 

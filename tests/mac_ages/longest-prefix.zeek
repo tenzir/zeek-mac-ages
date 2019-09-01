@@ -1,4 +1,4 @@
-# @TEST-EXEC: bro %INPUT > output
+# @TEST-EXEC: zeek %INPUT > output
 # @TEST-EXEC: btest-diff output
 
 function ymd_age(x: string): string
@@ -6,7 +6,7 @@ function ymd_age(x: string): string
 	return strftime("%Y-%m-%d", lookup_mac_age(x));
 	}
 
-event bro_init()
+event zeek_init()
 	{
 	# Shows the number of loaded entries.
 	print load_mac_ages("../../data.csv");

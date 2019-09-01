@@ -1,7 +1,7 @@
-# @TEST-EXEC: bro %INPUT > output
+# @TEST-EXEC: zeek %INPUT > output
 # @TEST-EXEC: btest-diff output
 
-event bro_init()
+event zeek_init()
 	{
 	local filename = getenv("MAC_AGES_CSV");
 	print load_mac_ages(filename);

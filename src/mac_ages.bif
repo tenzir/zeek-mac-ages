@@ -6,7 +6,7 @@
 %%}
 
 ## Load a database of MAC addresses for later lookup via
-## :bro:see:`lookup_mac_age`.
+## :zeek:see:`lookup_mac_age`.
 ##
 ## filename: The CSV file containing the MAC address ages.
 ##
@@ -24,7 +24,7 @@ function load_mac_ages%(csv_file: string%) : int
 ##
 ## Returns: The approximate age of the MAC address.
 ##
-## .. bro:see:: load_mac_ages
+## .. zeek:see:: load_mac_ages
 function lookup_mac_age%(mac: string%) : time
   %{
   using namespace std::chrono;

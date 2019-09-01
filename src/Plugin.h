@@ -1,5 +1,4 @@
-#ifndef BRO_PLUGIN_TENZIR_MAC_AGES
-#define BRO_PLUGIN_TENZIR_MAC_AGES
+#pragma once
 
 #include <plugin/Plugin.h>
 
@@ -19,5 +18,3 @@ extern Plugin plugin;
 } // namespace mac_ages
 } // namespace tenzir
 } // namespace plugin
-
-#endif

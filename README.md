@@ -15,14 +15,14 @@ First, install the package with the [Zeek package
 manager](https://github.com/zeek/package-manager):
 
 ```sh
-bro-pkg install tenzir/zeek-mac-ages
+zkg install tenzir/zeek-mac-ages
 ```
 
 Then make sure that you have a recent version of the MAC database installed
-somewhere. Set the environment variable `BRO_TENZIR_MAC_AGES_CSV` to the CSV
+somewhere. Set the environment variable `ZEEK_TENZIR_MAC_AGES_CSV` to the CSV
 file and you're set to load the plugin:
 
-```bro
+```zeek
 @load tenzir/mac-ages
 ```
 
@@ -30,7 +30,6 @@ By default, the script enhances the stock DHCP log with a field `mac_age`
 containing the approximate "birthday" of a MAC address in YYYY-MM-DD format.
 Here's an example log file generated with a [sample trace from the Wireshark
 wiki](https://wiki.wireshark.org/SampleCaptures):
-
 
 ```
 #separator \x09
@@ -48,7 +47,7 @@ wiki](https://wiki.wireshark.org/SampleCaptures):
 
 For more fine-grained control, have a lok at the [new builtin
 functions](src/mac_ages.bif) (BiFs) for replacing the MAC age database
-addresses and performing lookups a MAC addresses. 
+addresses and performing lookups a MAC addresses.
 
 Development
 -----------
@@ -57,19 +56,19 @@ If you want to compile the plugin from scratch, use the accompanying
 [`configure`](configure) helper script:
 
 ```sh
-export BRO=/path/to/bro-dist
-./configure --bro-dist="$BRO"
+export ZEEK=/path/to/zeek-dist
+./configure --zeek-dist="$ZEEK"
 cd build
 make
 ```
 
-After the compilation succeeded, notify Bro about the plugin:
+After the compilation succeeded, notify Zeek about the plugin:
 
 ```sh
-export BRO_PLUGIN_PATH=$(pwd)
-export BROPATH="$($BRO/build/bro-path-dev):$BRO_PLUGIN_PATH/.."
-alias bro=$BRO/build/src/bro
-bro -N | grep tenzir 
+export ZEEK_PLUGIN_PATH=$(pwd)
+export ZEEKPATH="$($ZEEK/build/zeek-path-dev):$ZEEK_PLUGIN_PATH/.."
+alias zeek=$ZEEK/build/src/zeek
+zeek -N | grep tenzir
 ```
 
 This should print:
@@ -79,13 +78,18 @@ This should print:
 tenzir::mac_ages - MAC address age estimation (dynamic, version 0.1.0)
 ```
 
-You can now play with code. For example, generate the above log file:
+You can now play with code. For example, to generate the above log file:
 
 ```
-bro -C -r dhcp.pcap tenzir/mac-ages
+wget https://github.com/hdm/mac-ages/raw/master/data/mac-ages.csv
+export ZEEK_TENZIR_MAC_AGES_CSV=mac-ages.csv
+zeek -C -r $ZEEK/testing/btest/Traces/dhcp/dhcp.trace tenzir/mac-ages
 ```
+
+This should generate a `dhcp.log` `2012-07-11` in the column `mac_age` for the
+MAC address `90:b1:1c:99:49:29`.
 
 LICENSE
 -------
 
-This plugin comes with BSD license.
+This plugin comes with a BSD license.
