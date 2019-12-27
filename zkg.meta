@@ -1,3 +1,3 @@
 [package]
-scripts_dir = scripts/tenzir/mac-ages
+script_dir = scripts/tenzir/mac-ages
 tags = conn, mac
